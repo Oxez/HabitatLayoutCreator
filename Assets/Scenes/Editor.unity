@@ -4057,7 +4057,6 @@ MonoBehaviour:
   autoDoors: 1
   doorWidthM: 0.9
   corridorType: 11
-  buildInEditorOnEnable: 1
   buildOnStartPlay: 1
   liveUpdate: 1
   liveDebounce: 0.05
@@ -4066,6 +4065,11 @@ MonoBehaviour:
   thinShell: 1
   endInset: 0.006
   capInset: 0.0015
+  wallMatBase: {fileID: 2100000, guid: 157f4b4c3f7175647be4ff45d546bdae, type: 2}
+  hullColor: {r: 0.85, g: 0.85, b: 0.88, a: 1}
+  roomPosts: 1
+  postSize: 0.08
+  postInset: 0.001
   autoBind: 1
   deckManager: {fileID: 794260418}
   rebindInterval: 1
