@@ -11,6 +11,8 @@ public class DeckManager : MonoBehaviour
     public GameObject         tilePrefab;
     public float              deckHeight = 2.5f;
 
+    public System.Action<EditorGrid> OnActiveDeckChanged;
+
     public int ActiveDeck { get; private set; } = 0;
     public List<EditorGrid> Decks = new();
 
@@ -48,6 +50,9 @@ public class DeckManager : MonoBehaviour
         index = Mathf.Clamp(index, 0, Decks.Count - 1);
         for (int i=0;i<Decks.Count;i++) Decks[i].gameObject.SetActive(i == index);
         ActiveDeck = index;
+
+        var current = Decks[index];
+        OnActiveDeckChanged?.Invoke(current);
     }
 
     public Dictionary<ZoneType,int> CountTilesAll()

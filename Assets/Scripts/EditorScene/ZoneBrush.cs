@@ -2,7 +2,7 @@
 // Created at 04.10.2025 09:28
 
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class ZoneBrush : MonoBehaviour
 {
@@ -34,36 +34,13 @@ public class ZoneBrush : MonoBehaviour
             bool painting = Input.GetMouseButton(0);
             bool erasing  = Input.GetKey(eraseKey);
 
-            if (painting && grid.Mask[t.X, t.Y]) t.SetZone(current);
+            if (painting && grid.Mask[t.X, t.Y] && !(EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())) t.SetZone(current);
             if (erasing) t.SetZone(ZoneType.None);
         }
         else if (_hover)
         {
             _hover.SetHover(false);
             _hover = null;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) current = ZoneType.Sleep;
-        if (Input.GetKeyDown(KeyCode.Alpha2)) current = ZoneType.Hygiene;
-        if (Input.GetKeyDown(KeyCode.Alpha3)) current = ZoneType.ECLSS;
-        if (Input.GetKeyDown(KeyCode.Alpha4)) current = ZoneType.Galley;
-        if (Input.GetKeyDown(KeyCode.Alpha5)) current = ZoneType.Storage;
-        if (Input.GetKeyDown(KeyCode.Alpha6)) current = ZoneType.Exercise;
-        if (Input.GetKeyDown(KeyCode.Alpha7)) current = ZoneType.Medical;
-        if (Input.GetKeyDown(KeyCode.Alpha8)) current = ZoneType.Maintenance;
-        if (Input.GetKeyDown(KeyCode.Alpha9)) current = ZoneType.Recreation;
-        if (Input.GetKeyDown(KeyCode.Alpha0)) current = ZoneType.Airlock;
-        if (Input.GetKeyDown(KeyCode.Q)) current = ZoneType.Corridor;
-
-        // test
-        if (Keyboard.current != null && Keyboard.current.bKey.wasPressedThisFrame)
-        {
-            for (int x = 2; x < 8; x++)
-            for (int y = 3; y < 6; y++)
-            {
-                var tile = grid.Tiles[x,y];
-                if (tile != null && grid.Mask[x,y]) tile.SetZone(current);
-            }
         }
     }
 }

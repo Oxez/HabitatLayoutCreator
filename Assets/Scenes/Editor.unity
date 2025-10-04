@@ -4304,7 +4304,7 @@ GameObject:
   - component: {fileID: 1075709849}
   - component: {fileID: 1075709848}
   - component: {fileID: 1075709847}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4324,15 +4324,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridWalls
   grid: {fileID: 1865505225}
-  wallHeight: 2.4
+  wallHeight: 1.4
   wallThickness: 0.08
   autoDoors: 1
   doorWidthM: 0.9
   corridorType: 11
-  buildOnAwake: 1
-  autoRebuildEachPlay: 1
+  buildOnStartPlay: 1
   liveUpdate: 1
   liveDebounce: 0.05
+  followGridTransform: 1
+  parentUnderGrid: 1
+  thinShell: 1
+  endInset: 0.006
+  capInset: 0.0015
+  wallMatBase: {fileID: 2100000, guid: 157f4b4c3f7175647be4ff45d546bdae, type: 2}
+  hullColor: {r: 0.85, g: 0.85, b: 0.88, a: 1}
+  roomPosts: 1
+  postSize: 0.08
+  postInset: 0.001
+  autoBind: 1
+  deckManager: {fileID: 794260418}
+  rebindInterval: 1
 --- !u!23 &1075709848
 MeshRenderer:
   m_ObjectHideFlags: 0

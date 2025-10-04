@@ -9,43 +9,61 @@ public class GridTile : MonoBehaviour
     public ZoneType Type { get; private set; } = ZoneType.None;
 
     Renderer _renderer;
-    Color    _baseColor;
+    MaterialPropertyBlock _mpb;
+    bool _hover;
+
+    static readonly Color kNeutral = new Color(0.90f, 0.90f, 0.92f, 1f);
 
     public System.Action<GridTile, ZoneType, ZoneType> OnZoneChanged; // (tile, oldType, newType)
+
+    void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+        _mpb = new MaterialPropertyBlock();
+        ApplyVisual();
+    }
 
     public void SetZone(ZoneType z)
     {
         if (z == Type) return;
         var old = Type;
         Type = z;
-        SetColor(GetColorFor(z));
+        ApplyVisual();
         OnZoneChanged?.Invoke(this, old, z);
-    }
-
-    void Awake()
-    {
-        _renderer = GetComponent<Renderer>();
-        _baseColor = new Color(0.9f,0.9f,0.9f,1f);
-        SetZone(ZoneType.None);
     }
 
     public void SetHover(bool on)
     {
-        var baseCol = GetColorFor(Type);
-        SetColor(on ? baseCol * 1.25f : baseCol);
+        if (_hover == on) return;
+        _hover = on;
+        ApplyVisual();
     }
 
-    void SetColor(Color c)
+    void ApplyVisual()
     {
-        var mat = _renderer.material;
-        if (mat.HasProperty("_BaseColor")) mat.SetColor("_BaseColor", c);
-        else if (mat.HasProperty("_Color")) mat.SetColor("_Color", c);
-        else _renderer.material.color = c;
+        Color baseCol = (Type == ZoneType.None) ? kNeutral : GetColorFor(Type);
+        if (_hover)
+            baseCol = Color.Lerp(baseCol, Color.gray, 0.25f);
+
+        _renderer.GetPropertyBlock(_mpb);
+        if (_renderer.sharedMaterial != null)
+        {
+            if (_renderer.sharedMaterial.HasProperty("_BaseColor"))
+                _mpb.SetColor("_BaseColor", baseCol);
+            else if (_renderer.sharedMaterial.HasProperty("_Color"))
+                _mpb.SetColor("_Color", baseCol);
+            else
+                _mpb.SetColor("_BaseColor", baseCol);
+        }
+        else
+            _mpb.SetColor("_BaseColor", baseCol);
+
+        _renderer.SetPropertyBlock(_mpb);
     }
 
-    static Color GetColorFor(ZoneType z) => z switch
+    public static Color GetColorFor(ZoneType z) => z switch
     {
-        ZoneType.None        => new Color(0.90f, 0.90f, 0.92f, 1f),
+        ZoneType.None        => kNeutral,
         ZoneType.Sleep       => new Color(0.55f, 0.78f, 1.00f, 1f),
         ZoneType.Hygiene     => new Color(0.40f, 0.90f, 0.85f, 1f),
         ZoneType.ECLSS       => new Color(0.95f, 0.70f, 0.30f, 1f),
