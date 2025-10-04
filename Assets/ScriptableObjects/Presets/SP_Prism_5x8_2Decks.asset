@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958951e626e848d4b208603e9377f60e, type: 3}
+  m_Name: SP_Prism_5x8_2Decks
+  m_EditorClassIdentifier: Assembly-CSharp::HabitatShapePreset
+  Shape: 1
+  Diameter: 5
+  Length: 8
+  Decks: 2
+  Stow: 0
+  CellSize: 0.5
