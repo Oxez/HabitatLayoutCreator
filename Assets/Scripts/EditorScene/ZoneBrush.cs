@@ -12,6 +12,11 @@ public class ZoneBrush : MonoBehaviour
 
     GridTile _hover;
 
+    public void SetCurrentBrush(ZoneType type)
+    {
+        current = type;
+    }
+
     void Update()
     {
         var cam = Camera.main;
@@ -48,6 +53,7 @@ public class ZoneBrush : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha8)) current = ZoneType.Maintenance;
         if (Input.GetKeyDown(KeyCode.Alpha9)) current = ZoneType.Recreation;
         if (Input.GetKeyDown(KeyCode.Alpha0)) current = ZoneType.Airlock;
+        if (Input.GetKeyDown(KeyCode.Q)) current = ZoneType.Corridor;
 
         // test
         if (Keyboard.current != null && Keyboard.current.bKey.wasPressedThisFrame)

@@ -38,13 +38,13 @@ public class HabitatShapeView : MonoBehaviour
             BuildWire();
         }
 
-        // Отметки палуб (тонкие контуры на экваторе, если хочется)
-        for (int d = 0; d < Mathf.Max(1, preset.Decks); d++)
+        for (int d=0; d<preset.Decks; d++)
         {
-            // отметим палубы лёгкими «кольцами» внутри цилиндра (в плоскости XZ)
-            var ring = CreateCircleXZ(Vector3.up * (d * deckHeight), preset.Diameter * 0.98f * 0.5f);
-            ring.name = $"Deck_{d}_Ring";
-            ring.transform.SetParent(_shellRoot, true);
+            float y = d * deckHeight;
+            if (preset.Shape == HabitatShape.Prism)
+                CreateRectXZ(new Vector3(0,y,0), preset.Length, preset.Diameter, $"Deck_{d}_Rect");
+            else
+                CreateCircleXZ(new Vector3(0,y,0), preset.Diameter * 0.5f * 0.98f).name = $"Deck_{d}_Ring";
         }
     }
 

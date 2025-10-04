@@ -4,11 +4,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.TextCore.Text;
 
 public static class ReportExporter
 {
     [System.Serializable]
-    class Report
+    public class Report
     {
         public string                    mission;
         public int                       crew;
@@ -16,6 +17,27 @@ public static class ReportExporter
         public float                     totalArea;
         public Dictionary<string, float> areaByZone;
         public string[]                  issues;
+
+        public Report(string mission, int crew, int days, float totalArea, 
+               Dictionary<string, float> areaByZone, string[] issues)
+        {
+            this.mission = mission;
+            this.crew = crew;
+            this.days = days;
+            this.totalArea = totalArea;
+            this.areaByZone = areaByZone;
+            this.issues = issues;
+        }
+        public Report(string json)
+        {
+            var rep = JsonUtility.FromJson<Report>(json);
+            this.mission = rep.mission;
+            this.crew = rep.crew;
+            this.days = rep.days;
+            this.totalArea = rep.totalArea;
+            this.areaByZone = rep.areaByZone;
+            this.issues = rep.issues;
+        }
     }
 
     public static string SaveJson(string path, string missionName, int crew, int days,
@@ -25,14 +47,21 @@ public static class ReportExporter
         var dict = new Dictionary<string, float>();
         foreach (var kv in areaByZone) dict[kv.Key.ToString()] = kv.Value;
 
-        var rep = new Report {
-            mission = missionName, crew = crew, days = days,
-            totalArea = totalArea,
-            areaByZone = dict,
-            issues = issues.ConvertAll(i => $"{i.Severity}: {i.Message}").ToArray()
-        };
+        var rep = new Report(
+            missionName, crew, days,
+            totalArea,
+            dict,
+            issues.ConvertAll(i => $"{i.Severity}: {i.Message}").ToArray()
+        );
         var json = JsonUtility.ToJson(rep, true);
         File.WriteAllText(path, json);
         return path;
+    }
+
+    public static Report loadJson(string path)
+    {
+        if (!File.Exists(path)) return null;
+        string json = File.ReadAllText(path);
+        return new Report(json);
     }
 }

@@ -49,4 +49,41 @@ public class DeckManager : MonoBehaviour
         for (int i=0;i<Decks.Count;i++) Decks[i].gameObject.SetActive(i == index);
         ActiveDeck = index;
     }
+
+    public Dictionary<ZoneType,int> CountTilesAll()
+    {
+        var dict = new Dictionary<ZoneType,int>();
+        foreach (var g in Decks)
+            for (int x=0;x<g.cols;x++)
+            for (int y=0;y<g.rows;y++)
+            {
+                var t = g.Tiles[x,y];
+                if (t==null || t.Type==ZoneType.None) continue;
+                if (!dict.ContainsKey(t.Type)) dict[t.Type]=0;
+                dict[t.Type]++;
+            }
+        return dict;
+    }
+
+    public Dictionary<ZoneType, float> AreasAllDecksM2()
+    {
+        var areas = new Dictionary<ZoneType, float>();
+        if (Decks.Count == 0) return areas;
+
+        float cell     = Decks[0].cellSize;
+        float cellArea = cell * cell;
+
+        foreach (var g in Decks)
+        {
+            for (int x = 0; x < g.cols; x++)
+            for (int y = 0; y < g.rows; y++)
+            {
+                var t = g.Tiles[x, y];
+                if (t == null || t.Type == ZoneType.None) continue;
+                if (!areas.ContainsKey(t.Type)) areas[t.Type] = 0f;
+                areas[t.Type] += cellArea;
+            }
+        }
+        return areas;
+    }
 }

@@ -15,5 +15,6 @@ public enum ZoneType
     Medical     = 7,
     Maintenance = 8,
     Recreation  = 9,
-    Airlock     = 10
+    Airlock     = 10,
+    Corridor    = 11
 }

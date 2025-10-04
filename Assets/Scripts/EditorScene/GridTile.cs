@@ -11,6 +11,17 @@ public class GridTile : MonoBehaviour
     Renderer _renderer;
     Color    _baseColor;
 
+    public System.Action<GridTile, ZoneType, ZoneType> OnZoneChanged; // (tile, oldType, newType)
+
+    public void SetZone(ZoneType z)
+    {
+        if (z == Type) return;
+        var old = Type;
+        Type = z;
+        ApplyColor(); // твоя раскраска
+        OnZoneChanged?.Invoke(this, old, z);
+    }
+
     void Awake()
     {
         _renderer = GetComponent<Renderer>();
@@ -51,6 +62,7 @@ public class GridTile : MonoBehaviour
         ZoneType.Maintenance => new Color(0.70f, 0.80f, 0.55f, 1f),
         ZoneType.Recreation  => new Color(1.00f, 0.65f, 0.85f, 1f),
         ZoneType.Airlock     => new Color(0.55f, 0.55f, 0.55f, 1f),
+        ZoneType.Corridor    => new Color(0.80f, 0.90f, 1.00f, 1f),
         _                    => Color.white
     };
 }
