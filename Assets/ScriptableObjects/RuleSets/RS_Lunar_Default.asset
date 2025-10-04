@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ecbf855be2f4b74b055c47fe743ab6d, type: 3}
+  m_Name: RS_Lunar_Default
+  m_EditorClassIdentifier: Assembly-CSharp::RuleSet
+  ZoneSpecs:
+  - {fileID: 11400000, guid: c7821882873cea14fa96975a790fe978, type: 2}
+  - {fileID: 11400000, guid: aea9f51a377717e409fef0dac8ad830b, type: 2}
+  - {fileID: 11400000, guid: 3e4b18c35bce5ee4db7a82dd128845a3, type: 2}
+  - {fileID: 11400000, guid: a0d75fbb186318c4aaaf84cd8e0e6ed7, type: 2}
+  - {fileID: 11400000, guid: c21f1c0f72155514a99c39e217a00b8d, type: 2}
+  - {fileID: 11400000, guid: 909ef03f6237e44429aa9b778c886bc7, type: 2}
+  - {fileID: 11400000, guid: 28064ef785309c04fa0845161ec463f6, type: 2}
+  - {fileID: 11400000, guid: a1d470e7ff2cdf44ab843a88da38d107, type: 2}
+  - {fileID: 11400000, guid: f80f3d6d4f216b444ae8a0bd1df15740, type: 2}
+  - {fileID: 11400000, guid: 97df302ed6227a54d8ff47522c0a658f, type: 2}
+  AdjacencyRules:
+  - A: 1
+    B: 6
+    ShouldSeparate: 1
+    DistanceMeters: 3
+  - A: 1
+    B: 3
+    ShouldSeparate: 0
+    DistanceMeters: 2
+  - A: 4
+    B: 2
+    ShouldSeparate: 0
+    DistanceMeters: 2
+  - A: 7
+    B: 10
+    ShouldSeparate: 0
+    DistanceMeters: 3
+  - A: 4
+    B: 5
+    ShouldSeparate: 0
+    DistanceMeters: 2

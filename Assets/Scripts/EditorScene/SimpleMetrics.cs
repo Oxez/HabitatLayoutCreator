@@ -28,8 +28,8 @@ public class SimpleMetrics : MonoBehaviour
         }
 
         float totalArea = totals.Values.Sum()*cellArea;
-        Debug.Log($"Total area: {totalArea:0.00} m²");
+        Debug.Log($"Total area: {totalArea:0.00} m2");
         foreach (var kv in totals.OrderBy(k=>k.Key))
-            Debug.Log($"{kv.Key}: {(kv.Value*cellArea):0.00} m²");
+            Debug.Log($"{kv.Key}: {(kv.Value*cellArea):0.00} m2");
     }
 }
