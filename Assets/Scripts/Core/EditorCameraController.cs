@@ -9,13 +9,16 @@ using UnityEngine.InputSystem;
 public class EditorCameraController : MonoBehaviour
 {
     [Header("Look")]
+    //Нужно сделать так чтобы эти данные мы могли изменять в SettingMenu
     public float lookSensitivity = 0.15f;
     public float pitchMin = -85f;
     public float pitchMax =  85f;
+    //
     public bool  holdMiddleMouseToLook = true;
     public bool  lockCursorWhileLooking = true;
-
+    
     [Header("Move")]
+    //Эти тоже
     public float moveSpeed = 6f;
     public float fastMultiplier = 3f;
     public float slowMultiplier = 0.35f;
@@ -25,7 +28,7 @@ public class EditorCameraController : MonoBehaviour
     public float scrollSpeedStep = 1f;
     public float minMoveSpeed = 0.5f;
     public float maxMoveSpeed = 50f;
-
+    //
     float _yaw;
     float _pitch;
 
