@@ -18,7 +18,7 @@ public class GridTile : MonoBehaviour
         if (z == Type) return;
         var old = Type;
         Type = z;
-        ApplyColor(); // твоя раскраска
+        SetColor(GetColorFor(z));
         OnZoneChanged?.Invoke(this, old, z);
     }
 
@@ -27,12 +27,6 @@ public class GridTile : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _baseColor = new Color(0.9f,0.9f,0.9f,1f);
         SetZone(ZoneType.None);
-    }
-
-    public void SetZone(ZoneType z)
-    {
-        Type = z;
-        SetColor(GetColorFor(z));
     }
 
     public void SetHover(bool on)

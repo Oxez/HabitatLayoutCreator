@@ -50,6 +50,9 @@ public class ShapePanelUI : MonoBehaviour
         btnDeckPrev.onClick.AddListener(() => { decks.SetActiveDeck(decks.ActiveDeck - 1); RefreshDeckLabel(); SyncBrush(); });
         btnDeckNext.onClick.AddListener(() => { decks.SetActiveDeck(decks.ActiveDeck + 1); RefreshDeckLabel(); SyncBrush(); });
 
+        var walls = FindObjectOfType<GridWalls>();
+        if (walls) walls.SetGrid(decks.Current);
+
         ddStow.onValueChanged.AddListener(v => {
             preset.Stow = (StowOrientation)v;
             Debug.Log($"[ShapePanelUI] Stow changed to {preset.Stow}");

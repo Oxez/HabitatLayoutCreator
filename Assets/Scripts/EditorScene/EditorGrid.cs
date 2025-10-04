@@ -23,6 +23,8 @@ public class EditorGrid : MonoBehaviour
 
     Transform _tilesRoot;
 
+    public System.Action<EditorGrid,int,int,ZoneType,ZoneType> OnTileChanged;
+
     public void Rebuild()
     {
         cols = Mathf.Max(1, Mathf.RoundToInt(lengthM / cellSize));
@@ -58,6 +60,11 @@ public class EditorGrid : MonoBehaviour
 
             var tile = tileGO.AddComponent<GridTile>();
             tile.X = x; tile.Y = y;
+
+            tile.OnZoneChanged += (t, oldZ, newZ) =>
+            {
+                OnTileChanged?.Invoke(this, t.X, t.Y, oldZ, newZ);
+            };
 
             tileGO.GetComponent<Collider>().enabled = inside;
             tileGO.GetComponent<Renderer>().material.color *= inside ? 1f : 0.45f;

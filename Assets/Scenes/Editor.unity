@@ -4054,10 +4054,13 @@ MonoBehaviour:
   grid: {fileID: 1865505225}
   wallHeight: 2.4
   wallThickness: 0.08
-  buildOnAwake: 1
   autoDoors: 1
   doorWidthM: 0.9
   corridorType: 11
+  buildOnAwake: 1
+  autoRebuildEachPlay: 1
+  liveUpdate: 1
+  liveDebounce: 0.05
 --- !u!23 &1075709848
 MeshRenderer:
   m_ObjectHideFlags: 0
