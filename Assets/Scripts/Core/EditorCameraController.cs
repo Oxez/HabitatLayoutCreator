@@ -12,7 +12,7 @@ public class EditorCameraController : MonoBehaviour
     public float lookSensitivity = 0.15f;
     public float pitchMin = -85f;
     public float pitchMax =  85f;
-    public bool  holdRightMouseToLook = true;
+    public bool  holdMiddleMouseToLook = true;
     public bool  lockCursorWhileLooking = true;
 
     [Header("Move")]
@@ -42,7 +42,7 @@ public class EditorCameraController : MonoBehaviour
         if (Mathf.Abs(scroll) > 0.0001f)
             moveSpeed = Mathf.Clamp(moveSpeed + scroll * scrollSpeedStep, minMoveSpeed, maxMoveSpeed);
 
-        bool looking = !holdRightMouseToLook || GetRightMouse();
+        bool looking = !holdMiddleMouseToLook || GetMiddleMouse();
         if (looking)
         {
             Vector2 mDelta = GetMouseDelta();
@@ -131,12 +131,12 @@ public class EditorCameraController : MonoBehaviour
         #endif
     }
 
-    static bool GetRightMouse()
+    static bool GetMiddleMouse()
     {
         #if ENABLE_INPUT_SYSTEM
-        return Mouse.current != null && Mouse.current.rightButton.isPressed;
+        return Mouse.current != null && Mouse.current.middleButton.isPressed;
         #else
-        return Input.GetMouseButton(1);
+        return Input.GetMouseButton(2);
         #endif
     }
 
