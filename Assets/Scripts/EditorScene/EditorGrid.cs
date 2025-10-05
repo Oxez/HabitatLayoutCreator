@@ -24,6 +24,8 @@ public class EditorGrid : MonoBehaviour
     Transform _tilesRoot;
 
     public System.Action<EditorGrid,int,int,ZoneType,ZoneType> OnTileChanged;
+    public event System.Action OnGridRebuilt;
+    public int BuildVersion { get; private set; } = 0;
 
     public void Rebuild()
     {
@@ -71,6 +73,9 @@ public class EditorGrid : MonoBehaviour
 
             Tiles[x, y] = tile;
         }
+
+        BuildVersion++;
+        OnGridRebuilt?.Invoke();
     }
 
     public bool TryRaycastTile(Ray ray, out GridTile hitTile)

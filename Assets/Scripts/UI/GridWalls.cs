@@ -50,6 +50,10 @@ public class GridWalls : MonoBehaviour
     MeshFilter _mf;
     float      _nextBuildTime = -1f;
     bool       _rebuilding;
+    int        _lastCols, _lastRows;
+    float      _lastCell;
+    int        _lastGridId;
+    int        _lastBuildVersion;
 
     void OnEnable()
     {
@@ -90,6 +94,34 @@ public class GridWalls : MonoBehaviour
             _nextBuildTime = -1f;
             Rebuild();
         }
+
+        if (grid != null)
+        {
+            if (_lastGridId != grid.GetInstanceID())
+            {
+                UnsubscribeFromGrid(grid);
+                SubscribeToGrid(grid);
+                ScheduleRebuildSoon();
+            }
+
+            if (_lastBuildVersion != grid.BuildVersion ||
+                _lastCols != grid.cols || _lastRows != grid.rows || Mathf.Abs(_lastCell - grid.cellSize) > 1e-6f)
+            {
+                SnapshotGridSignature(grid);
+                ScheduleRebuildSoon();
+            }
+
+            if (!grid.gameObject.activeInHierarchy)
+            {
+                ClearBuckets();
+                if (_mf) _mf.sharedMesh = null;
+#if UNITY_EDITOR
+                Debug.Log("[GridWalls] Target grid is inactive, skipping build");
+#endif
+                _rebuilding = false;
+                return;
+            }
+        }
     }
 
     void TryAutoBind(bool now = false)
@@ -128,7 +160,12 @@ public class GridWalls : MonoBehaviour
             ScheduleRebuildSoon();
             return;
         }
+
         UnsubscribeFromGrid(grid);
+
+        ClearBuckets();
+        if (_mf) _mf.sharedMesh = null;
+
         grid = g;
 
         if (parentUnderGrid && grid != null)
@@ -136,9 +173,8 @@ public class GridWalls : MonoBehaviour
             transform.SetParent(grid.transform, true);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
+            transform.localScale    = Vector3.one;
         }
-        ScheduleRebuildSoon();
 
         SubscribeToGrid(grid);
         ScheduleRebuildSoon();
@@ -146,11 +182,31 @@ public class GridWalls : MonoBehaviour
 
     void SubscribeToGrid(EditorGrid g)
     {
-        if (g != null) g.OnTileChanged += HandleTileChanged;
+        if (g == null) return;
+        g.OnTileChanged  += HandleTileChanged;
+        g.OnGridRebuilt  += HandleGridRebuilt;
+        SnapshotGridSignature(g);
     }
+
     void UnsubscribeFromGrid(EditorGrid g)
     {
-        if (g != null) g.OnTileChanged -= HandleTileChanged;
+        if (g == null) return;
+        g.OnTileChanged  -= HandleTileChanged;
+        g.OnGridRebuilt  -= HandleGridRebuilt;
+    }
+
+    void HandleGridRebuilt()
+    {
+        ScheduleRebuildSoon();
+    }
+
+    void SnapshotGridSignature(EditorGrid g)
+    {
+        _lastCols = g.cols;
+        _lastRows = g.rows;
+        _lastCell = g.cellSize;
+        _lastGridId = g.GetInstanceID();
+        _lastBuildVersion = g.BuildVersion;
     }
 
     void HandleTileChanged(EditorGrid g, int x, int y, ZoneType oldZ, ZoneType newZ)
