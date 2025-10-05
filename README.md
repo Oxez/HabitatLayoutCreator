@@ -32,10 +32,6 @@ An interactive Unity tool to quickly sketch **space habitats**: define shape/vol
   - Snap to cell center, rotate by 90°, **continuous stamping** on hold.
   - **Occupancy** blocks cells and affects validation & corridor width.
 
-- **Persistence**
-  - Save/Load to JSON; **Export PNG** top-down plan.
-  - **Mission presets** (e.g., `Lunar-4-180`, `Transit-4-90`, `Mars-6-500`).
-
 - **Background**
   - Built-in 16:9 starfield UI background (non-blocking for input).
 
