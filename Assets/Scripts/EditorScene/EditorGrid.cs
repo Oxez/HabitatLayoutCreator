@@ -86,4 +86,51 @@ public class EditorGrid : MonoBehaviour
         }
         return false;
     }
+
+    public Vector3 WorldToLocalPoint(Vector3 world) => transform.InverseTransformPoint(world);
+
+    public Vector3 LocalToWorldPoint(Vector3 local) => transform.TransformPoint(local);
+
+    public Vector3 CellToLocalCenter(int x, int y)
+    {
+        float cs = cellSize;
+        return new Vector3(
+            x * cs - cols * cs * 0.5f + cs * 0.5f,
+            0f,
+            y * cs - rows * cs * 0.5f + cs * 0.5f
+        );
+    }
+
+    public Vector3 CellToWorldCenter(int x, int y) => LocalToWorldPoint(CellToLocalCenter(x, y));
+
+    public Vector2Int WorldToCell(Vector3 world)
+    {
+        var   local = WorldToLocalPoint(world);
+        float cs    = cellSize;
+
+        int x = Mathf.FloorToInt((local.x + cols * cs * 0.5f) / cs);
+        int y = Mathf.FloorToInt((local.z + rows * cs * 0.5f) / cs);
+
+        return new Vector2Int(
+            Mathf.Clamp(x, 0, Mathf.Max(0, cols - 1)),
+            Mathf.Clamp(y, 0, Mathf.Max(0, rows - 1))
+        );
+    }
+
+    public Vector2Int LocalToCell(Vector3 local)
+    {
+        float cs = cellSize;
+        int   x  = Mathf.FloorToInt((local.x + cols * cs * 0.5f) / cs);
+        int   y  = Mathf.FloorToInt((local.z + rows * cs * 0.5f) / cs);
+        return new Vector2Int(
+            Mathf.Clamp(x, 0, Mathf.Max(0, cols - 1)),
+            Mathf.Clamp(y, 0, Mathf.Max(0, rows - 1))
+        );
+    }
+
+    public Vector3 SnapWorldToCellCenter(Vector3 world)
+    {
+        var c = WorldToCell(world);
+        return CellToWorldCenter(c.x, c.y);
+    }
 }

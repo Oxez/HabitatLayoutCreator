@@ -30,7 +30,7 @@ public static class LayoutValidator
                 yield return new ValidationIssue
                 {
                     Severity = actual <= 0.0001f ? Severity.Error : Severity.Warning,
-                    Message = $"[{spec.Type}] {actual:0.0} м² < требуемых {required:0.0} м²"
+                    Message = $"[{spec.Type}] {actual:0.0} m² < required {required:0.0} m²"
                 };
             }
         }
@@ -47,13 +47,13 @@ public static class LayoutValidator
                 yield return new ValidationIssue
                 {
                     Severity = Severity.Warning,
-                    Message = $"{rule.A} и {rule.B} слишком близко ({dist:0.0} м < {rule.DistanceMeters:0.0} м)"
+                    Message = $"{rule.A} and {rule.B} too close ({dist:0.0} m < {rule.DistanceMeters:0.0} m)"
                 };
             if (!rule.ShouldSeparate && dist > rule.DistanceMeters)
                 yield return new ValidationIssue
                 {
                     Severity = Severity.Info,
-                    Message = $"{rule.A} и {rule.B} лучше расположить ближе ({dist:0.0} м > {rule.DistanceMeters:0.0} м)"
+                    Message = $"{rule.A} and {rule.B} better to place it closer ({dist:0.0} m > {rule.DistanceMeters:0.0} m)"
                 };
         }
 
@@ -86,18 +86,18 @@ public static class LayoutValidator
             return new ValidationIssue
             {
                 Severity = Severity.Error,
-                Message = $"{a} → {b}: нет пути ({rep.why})"
+                Message = $"{a} → {b}: no path ({rep.why})"
             };
         if (rep.minWidthMeters + 1e-3f < minAisle)
             return new ValidationIssue
             {
                 Severity = Severity.Warning,
-                Message = $"{a} → {b}: узко {rep.minWidthMeters:0.00} м < {minAisle:0.00} м (L={rep.lengthMeters:0.0} м)"
+                Message = $"{a} → {b}: tight {rep.minWidthMeters:0.00} m < {minAisle:0.00} m (L={rep.lengthMeters:0.0} m)"
             };
         return new ValidationIssue
         {
             Severity = Severity.Info,
-            Message = $"{a} → {b}: ок (L={rep.lengthMeters:0.0} м, min {rep.minWidthMeters:0.00} м)"
+            Message = $"{a} → {b}: ok (L={rep.lengthMeters:0.0} m, min {rep.minWidthMeters:0.00} m)"
         };
     }
 
@@ -151,7 +151,7 @@ public static class LayoutValidator
                 yield return new ValidationIssue
                 {
                     Severity = actual <= 0.0001f ? Severity.Error : Severity.Warning,
-                    Message = $"[{spec.Type}] {actual:0.0} м² < требуемых {required:0.0} м²"
+                    Message = $"[{spec.Type}] {actual:0.0} m² < required {required:0.0} m²"
                 };
             }
         }

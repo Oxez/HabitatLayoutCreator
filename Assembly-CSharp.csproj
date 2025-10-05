@@ -47,14 +47,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.6f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EditorScene\EditorGridOccupancy.cs" />
     <Compile Include="Assets\Scripts\EditorScene\GridTile.cs" />
     <Compile Include="Assets\Scripts\EditorScene\Presets\MissionPreset.cs" />
     <Compile Include="Assets\Scripts\UI\BrushPanelUI.cs" />
+    <Compile Include="Assets\Scripts\EditorScene\Objects\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\EditorScene\RuleSets\ZoneSpec.cs" />
     <Compile Include="Assets\Scripts\EditorScene\SimpleMetrics.cs" />
     <Compile Include="Assets\Scripts\EditorScene\ZoneBrush.cs" />
     <Compile Include="Assets\Scripts\EditorScene\RuleSets\RuleSet.cs" />
     <Compile Include="Assets\Scripts\EditorScene\Pathfind\PathAnalyzer.cs" />
+    <Compile Include="Assets\Scripts\EditorScene\Objects\ObjectPlacer.cs" />
     <Compile Include="Assets\Scripts\Validation\LayoutValidator.cs" />
     <Compile Include="Assets\Scripts\EditorScene\Pathfind\PathOverlay.cs" />
     <Compile Include="Assets\Scripts\Core\EditorCameraController.cs" />
