@@ -8,18 +8,18 @@ public class ZoneSpec : ScriptableObject
 {
     public ZoneType Type;
 
-    [Header("Минимум площади")]
-    [Tooltip("м2 на 1 члена экипажа")]
+    [Header("Minimum area")]
+    [Tooltip("m2 per 1 crew member")]
     public float MinAreaPerCrew = 1.5f;
 
-    [Tooltip("доп. м2 на каждые 100 суток миссии")]
+    [Tooltip("additional m2 for every 100 days of the mission")]
     public float AreaPer100Days = 0.5f;
 
-    [Header("Ширина проходов")]
-    [Tooltip("Минимальная ширина прохода в метрах вокруг зоны")]
+    [Header("Width of passages")]
+    [Tooltip("Minimum width of passage in meters around the area")]
     public float MinAisleWidth = 0.9f;
 
-    [Header("Нежелательные факторы (0..1)")]
+    [Header("Undesirable factors (0..1)")]
     [Range(0,1)] public float Noise  = 0.5f;
     [Range(0,1)] public float Odor   = 0.5f;
 }

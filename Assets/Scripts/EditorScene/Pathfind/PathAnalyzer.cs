@@ -74,9 +74,9 @@ public static class PathAnalyzer
         var walkable = BuildWalkable(g);
 
         if (!TryGetNearestCorridor(g, a, out var start))
-            return new PathReport{ hasPath=false, why=$"Нет коридора рядом с {a}" };
+            return new PathReport{ hasPath=false, why=$"no corridor nearby {a}" };
         if (!TryGetNearestCorridor(g, b, out var goal))
-            return new PathReport{ hasPath=false, why=$"Нет коридора рядом с {b}" };
+            return new PathReport{ hasPath=false, why=$"no corridor nearby {b}" };
 
         // Можно оставить эрозию для “жёсткой” проверки требуемой ширины:
         var   dist      = Pathfinding.Clearance(g, walkable);
@@ -92,7 +92,7 @@ public static class PathAnalyzer
         // путь — сначала пробуем в “эрозированной” сетке (если нет — всё равно посчитаем бутылочное место)
         var path = Pathfinding.AStar(g, walkEroded, start, goal) ?? Pathfinding.AStar(g, walkable, start, goal);
         if (path == null)
-            return new PathReport{ hasPath=false, why=$"Нет пути {a} → {b}" };
+            return new PathReport{ hasPath=false, why=$"no path {a} -> {b}" };
 
         // ТОЧНАЯ ширина: минимальный локальный размах вдоль пути
         int minCells = int.MaxValue;
@@ -106,7 +106,7 @@ public static class PathAnalyzer
             hasPath = (path != null),
             lengthMeters = length,
             minWidthMeters = widthM,
-            why = (widthM + 1e-3f < minWidthM) ? $"Ширина {widthM:0.00} м < {minWidthM:0.00} м" : ""
+            why = (widthM + 1e-3f < minWidthM) ? $"Width {widthM:0.00} м < {minWidthM:0.00} м" : ""
         };
     }
 
