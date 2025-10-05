@@ -2,8 +2,6 @@
 
 An interactive Unity tool to quickly sketch **space habitats**: define shape/volume, paint **functional zones**, place **furniture/equipment**, and get **live metrics & validation** based on mission rules.
 
-![screenshot](https://i.ibb.co/h06zkhG/49714933-37e0-438f-8f9d-cb00a5ef1248.jpg)
-
 ---
 
 ## ✨ Features
