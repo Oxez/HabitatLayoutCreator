@@ -2046,7 +2046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1324051807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2251,7 +2251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Anton Stoliarenko Olehovych
+  m_text: Stoliarenko Anton Olehovych
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2341,7 +2341,6 @@ GameObject:
   - component: {fileID: 1436683714}
   - component: {fileID: 1436683713}
   - component: {fileID: 1436683712}
-  - component: {fileID: 1436683715}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2410,27 +2409,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1436683715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436683711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88db46792f80b0f40b8619c5f6e128af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Buttons
-  StartBt: {fileID: 0}
-  SettingBt: {fileID: 0}
-  ModelsBt: {fileID: 0}
-  DevelopersBt: {fileID: 0}
-  DeveloperMenuExitBt: {fileID: 0}
-  SettingMenuExitBt: {fileID: 0}
-  DevelopersMenu: {fileID: 0}
-  MainMenu: {fileID: 0}
-  SettingMenu: {fileID: 0}
 --- !u!1 &1471217254
 GameObject:
   m_ObjectHideFlags: 0
